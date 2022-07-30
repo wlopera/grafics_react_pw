@@ -7,7 +7,7 @@ export const columns = [
   { dataField: "grandSlamUSA", text: "Abierto de Estados Unidos" },
 ];
 
-export const data = [
+export const records = [
   {
     player: "Margaret Court",
     total: 24,
