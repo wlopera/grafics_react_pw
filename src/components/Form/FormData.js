@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { columns, records } from "../../store/data";
+import MyTextArea from "../UI/MyTextArea";
 
 const FormData = () => {
   const [cols, setCols] = useState([]);
@@ -8,78 +9,112 @@ const FormData = () => {
   const [header, setHeader] = useState("");
   const [data, setData] = useState("");
   const [alert, setAlert] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     setCols(columns);
     setRows(records);
-    setHeader(JSON.stringify(columns, null, 2));
-    setData(JSON.stringify(records, null, 2));
+    setHeader(columns);
+    setData(records);
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    try {
-      setCols(JSON.parse(header));
-    } catch (err) {
-      setAlert("Json de columnas mal formado: " + err.message);
-      console.info("Error columnas:", err);
-      return;
-    }
-
-    try {
-      setCols(JSON.parse(data));
-    } catch (err) {
-      setAlert("Json de datos mal formado: " + err.message);
-      console.info("Error data:", err);
-      return;
-    }
+    setCols(header);
+    setRows(data);
+    console.log(1111, header);
+    console.log(2222, data);
   };
 
-  const handleSetHeader = (event) => {
-    setHeader(event.target.value);
+  const handleUpdateHeader = (value) => {
+    setHeader(value);
     setAlert(null);
   };
 
-  const handleSetData = (event) => {
-    setData(event.target.value);
+  const handleUpdateData = (data) => {
+    setData(data);
     setAlert(null);
   };
 
   return (
     <div>
       {alert && (
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           {alert}
         </div>
       )}
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="headers" className="form-label">
-            Cabecera de la tabla
-          </label>
-          <textarea
-            className="form-control"
-            id="headerArea"
-            rows="10"
-            value={header}
-            onChange={handleSetHeader}
-          />
+        <div id="accordion">
+          <div className="card">
+            <div className="card-header" id="headingOne">
+              <h5 className="mb-0">
+                <button
+                  className="btn btn-link"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                  type="button"
+                >
+                  Cabecera
+                </button>
+              </h5>
+            </div>
+
+            <div
+              id="collapseOne"
+              className="collapse show"
+              aria-labelledby="headingOne"
+              data-parent="#accordion"
+            >
+              <div className="card-body">
+                <MyTextArea
+                  label="Cabecera de la tabla"
+                  text={header}
+                  updateText={handleUpdateHeader}
+                  updateDisabled={setDisabled}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header" id="headingTwo">
+              <h5 className="mb-0">
+                <button
+                  className="btn btn-link collapsed"
+                  data-toggle="collapse"
+                  data-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                  type="button"
+                >
+                  Datos
+                </button>
+              </h5>
+            </div>
+            <div
+              id="collapseTwo"
+              className="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordion"
+            >
+              <div className="card-body">
+                <MyTextArea
+                  label="Datos de la tabla"
+                  text={data}
+                  updateText={handleUpdateData}
+                  updateDisabled={setDisabled}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="mb-3">
-          <label htmlFor="data" className="form-label">
-            Datos de la tabla
-          </label>
-          <textarea
-            className="form-control"
-            id="dataArea"
-            rows="10"
-            value={data}
-            onChange={handleSetData}
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Generar
+        <button
+          type="submit"
+          className="btn btn-primary mt-2"
+          disabled={disabled}
+        >
+          Procesar
         </button>
       </form>
     </div>
