@@ -1,56 +1,123 @@
 import React, { useEffect, useState } from "react";
 
-import { columns, data } from "../../store/data";
+import { columns, records } from "../../store/data";
+import MyTextArea from "../UI/MyTextArea";
 
 const FormData = () => {
   const [cols, setCols] = useState([]);
   const [rows, setRows] = useState([]);
+  const [header, setHeader] = useState("");
+  const [data, setData] = useState("");
+  const [alert, setAlert] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     setCols(columns);
-    setRows(data);
+    setRows(records);
+    setHeader(columns);
+    setData(records);
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Columas:", cols);
+    setCols(header);
+    setRows(data);
+    console.log(1111, header);
+    console.log(2222, data);
   };
 
-  const handlerSetCols = (event) => {
-    console.log(1234, JSON.parse(event.target.value));
-    //setCols(JSON.parse(event.target.value));
+  const handleUpdateHeader = (value) => {
+    setHeader(value);
+    setAlert(null);
+  };
+
+  const handleUpdateData = (data) => {
+    setData(data);
+    setAlert(null);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label htmlFor="headers" className="form-label">
-          Cabecera de la tabla
-        </label>
-        <textarea
-          className="form-control"
-          id="headerArea"
-          rows="10"
-          value={JSON.stringify(cols, null, 2)}
-          onChange={handlerSetCols}
-        ></textarea>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="data" className="form-label">
-          Datos de la tabla
-        </label>
-        <textarea
-          className="form-control"
-          id="dataArea"
-          rows="10"
-          value={JSON.stringify(rows, null, 2)}
-          onChange={() => {}}
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">
-        Generar
-      </button>
-    </form>
+    <div>
+      {alert && (
+        <div className="alert alert-danger" role="alert">
+          {alert}
+        </div>
+      )}
+      <form onSubmit={handleSubmit}>
+        <div id="accordion">
+          <div className="card">
+            <div className="card-header" id="headingOne">
+              <h5 className="mb-0">
+                <button
+                  className="btn btn-link"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                  type="button"
+                >
+                  Cabecera
+                </button>
+              </h5>
+            </div>
+
+            <div
+              id="collapseOne"
+              className="collapse show"
+              aria-labelledby="headingOne"
+              data-parent="#accordion"
+            >
+              <div className="card-body">
+                <MyTextArea
+                  label="Cabecera de la tabla"
+                  text={header}
+                  updateText={handleUpdateHeader}
+                  updateDisabled={setDisabled}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header" id="headingTwo">
+              <h5 className="mb-0">
+                <button
+                  className="btn btn-link collapsed"
+                  data-toggle="collapse"
+                  data-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                  type="button"
+                >
+                  Datos
+                </button>
+              </h5>
+            </div>
+            <div
+              id="collapseTwo"
+              className="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordion"
+            >
+              <div className="card-body">
+                <MyTextArea
+                  label="Datos de la tabla"
+                  text={data}
+                  updateText={handleUpdateData}
+                  updateDisabled={setDisabled}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary mt-2"
+          disabled={disabled}
+        >
+          Procesar
+        </button>
+      </form>
+    </div>
   );
 };
 
