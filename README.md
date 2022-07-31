@@ -13,3 +13,17 @@ Graficador de tablas -> React - ChatJS
 
 ### Habilita el botón procesar al actualizar la data
 ![Captura4](https://user-images.githubusercontent.com/7141537/182033419-2985fe36-1f33-44f8-ac9e-8ae304590172.PNG)
+
+### Gráficas
+
+#### Pie
+![Captura](https://user-images.githubusercontent.com/7141537/182040240-5627efcf-cb4a-40de-9415-f2ca34baa4db.PNG)
+
+#### Bar
+![Captura1](https://user-images.githubusercontent.com/7141537/182040235-e7b56613-755b-439f-8b0e-2d54a5491ff0.PNG)
+
+
+#### Line
+![Captura2](https://user-images.githubusercontent.com/7141537/182040239-9dc25872-0457-4b27-bcf1-95bf4114f39f.PNG)
+
+
