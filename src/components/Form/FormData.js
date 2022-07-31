@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from "react";
 
-import { columns, records } from "../../store/data";
 import MyTextArea from "../UI/MyTextArea";
 
-const FormData = () => {
-  const [cols, setCols] = useState([]);
-  const [rows, setRows] = useState([]);
+const FormData = ({ cols, rows, onProcess }) => {
   const [header, setHeader] = useState("");
   const [data, setData] = useState("");
   const [alert, setAlert] = useState(null);
   const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
-    setCols(columns);
-    setRows(records);
-    setHeader(columns);
-    setData(records);
-  }, []);
+    setHeader(cols);
+    setData(rows);
+  }, [cols, rows]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setCols(header);
-    setRows(data);
-    console.log(1111, header);
-    console.log(2222, data);
+    onProcess(header, data, true);
   };
 
   const handleUpdateHeader = (value) => {
@@ -111,7 +103,7 @@ const FormData = () => {
         </div>
         <button
           type="submit"
-          className="btn btn-primary mt-2"
+          className="btn btn-primary mt-2 btn-sm"
           disabled={disabled}
         >
           Procesar

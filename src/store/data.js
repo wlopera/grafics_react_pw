@@ -4,7 +4,7 @@ export const columns = [
   { dataField: "grandSlamAus", text: "Australia" },
   { dataField: "grandSlamRG", text: "Roland Garros" },
   { dataField: "grandSlamWim", text: "Wimbledon" },
-  { dataField: "grandSlamUSA", text: "Abierto de Estados Unidos" },
+  { dataField: "grandSlamUSA", text: "Estados Unidos" },
 ];
 
 export const records = [

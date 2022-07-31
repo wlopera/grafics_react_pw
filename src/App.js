@@ -1,14 +1,8 @@
 import React from "react";
-import FormData from "./components/Form/FormData";
-import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
 
 const App = () => {
-  return (
-    <div className="container">
-      <Header />
-      <FormData />
-    </div>
-  );
+  return <Main />;
 };
 
 export default App;
