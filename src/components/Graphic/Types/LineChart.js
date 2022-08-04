@@ -9,25 +9,9 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+
 import { Line } from "react-chartjs-2";
-
-const backgroundColor = [
-  "rgba(255, 99, 132, 0.2)",
-  "rgba(54, 162, 235, 0.2)",
-  "rgba(255, 206, 86, 0.2)",
-  "rgba(75, 192, 192, 0.2)",
-  "rgba(153, 102, 255, 0.2)",
-  "rgba(255, 159, 64, 0.2)",
-];
-
-const borderColor = [
-  "rgba(255, 99, 132, 1)",
-  "rgba(54, 162, 235, 1)",
-  "rgba(255, 206, 86, 1)",
-  "rgba(75, 192, 192, 1)",
-  "rgba(153, 102, 255, 1)",
-  "rgba(255, 159, 64, 1)",
-];
+import randomColor from "randomcolor";
 
 const LineChart = ({ title, labels, records, cols }) => {
   ChartJS.register(
@@ -39,6 +23,14 @@ const LineChart = ({ title, labels, records, cols }) => {
     Tooltip,
     Legend
   );
+
+  let backgroundColors = [];
+  let borderColors = [];
+
+  for (let index = 0; index < records.length; index++) {
+    backgroundColors.push(randomColor());
+    borderColors.push(randomColor());
+  }
 
   const options = {
     responsive: true,
@@ -62,10 +54,10 @@ const LineChart = ({ title, labels, records, cols }) => {
         data.push(record[field]);
       });
       result.push({
-        label: record.player,
+        label: labels[index],
         data: data,
-        backgroundColor: backgroundColor[index],
-        borderColor: borderColor[index],
+        backgroundColor: backgroundColors[index],
+        borderColor: borderColors[index],
       });
     });
     return result;

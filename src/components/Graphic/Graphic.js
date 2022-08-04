@@ -57,6 +57,7 @@ const Graphic = ({ cols, rows, updateGraph }) => {
   const handleOptionGraphics = (event) => {
     const value = parseInt(event.target.value);
     setCurrentGraphic(value);
+    setCurrentOption("total");
   };
 
   const title =
@@ -72,22 +73,6 @@ const Graphic = ({ cols, rows, updateGraph }) => {
       >
         Regresar
       </button>
-
-      <div>
-        <select
-          className="form-select form-select-sm mb-3 mt-2"
-          aria-label=".form-select-sm"
-          value={currentOption}
-          onChange={handleOption}
-        >
-          <option value="total">Totales</option>
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.text}
-            </option>
-          ))}
-        </select>
-      </div>
       <div>
         <select
           className="form-select form-select-sm mb-3 mt-2"
@@ -102,6 +87,24 @@ const Graphic = ({ cols, rows, updateGraph }) => {
           ))}
         </select>
       </div>
+
+      {currentGraphic !== 3 && (
+        <div>
+          <select
+            className="form-select form-select-sm mb-3 mt-2"
+            aria-label=".form-select-sm"
+            value={currentOption}
+            onChange={handleOption}
+          >
+            <option value="total">Totales</option>
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.text}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       {currentGraphic === 1 && (
         <div className="mt-2">
           {options.length > 0 && (
