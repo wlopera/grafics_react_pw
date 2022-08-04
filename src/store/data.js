@@ -1,16 +1,14 @@
 export const columns = [
   { dataField: "player", text: "Jugador" },
-  { dataField: "total", text: "Totales" },
-  { dataField: "grandSlamAus", text: "Australia" },
+  { dataField: "grandSlamAus", text: "Abierto de Australia" },
   { dataField: "grandSlamRG", text: "Roland Garros" },
   { dataField: "grandSlamWim", text: "Wimbledon" },
-  { dataField: "grandSlamUSA", text: "Estados Unidos" },
+  { dataField: "grandSlamUSA", text: "Abierto de Estados Unidos" },
 ];
 
 export const records = [
   {
     player: "Margaret Court",
-    total: 24,
     grandSlamAus: 11,
     grandSlamRG: 5,
     grandSlamWim: 3,
@@ -18,7 +16,6 @@ export const records = [
   },
   {
     player: "Serena Williams",
-    total: 23,
     grandSlamAus: 7,
     grandSlamRG: 3,
     grandSlamWim: 7,
@@ -26,7 +23,6 @@ export const records = [
   },
   {
     player: "Steffi Graf",
-    total: 22,
     grandSlamAus: 4,
     grandSlamRG: 6,
     grandSlamWim: 7,
@@ -34,7 +30,6 @@ export const records = [
   },
   {
     player: "Rafael Nadal",
-    total: 22,
     grandSlamAus: 2,
     grandSlamRG: 14,
     grandSlamWim: 2,
@@ -42,7 +37,6 @@ export const records = [
   },
   {
     player: "Novak Djokovic",
-    total: 21,
     grandSlamAus: 9,
     grandSlamRG: 2,
     grandSlamWim: 7,
@@ -50,10 +44,27 @@ export const records = [
   },
   {
     player: "Roger Federer",
-    total: 20,
     grandSlamAus: 6,
     grandSlamRG: 1,
     grandSlamWim: 8,
     grandSlamUSA: 5,
+  },
+];
+
+export const graphics = [
+  {
+    key: 1,
+    text: "Torta",
+    value: 1,
+  },
+  {
+    key: 2,
+    text: "Barra",
+    value: 2,
+  },
+  {
+    key: 3,
+    text: "Línea",
+    value: 3,
   },
 ];

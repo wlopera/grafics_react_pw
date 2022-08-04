@@ -29,7 +29,7 @@ const borderColor = [
   "rgba(255, 159, 64, 1)",
 ];
 
-const LineChart = ({ title, labels, records }) => {
+const LineChart = ({ title, labels, records, cols }) => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -52,17 +52,18 @@ const LineChart = ({ title, labels, records }) => {
     },
   };
 
+  const fields = cols.map((col) => col.value);
+
   const getData = () => {
     let result = [];
     records.forEach((record, index) => {
+      let data = [];
+      fields.forEach((field) => {
+        data.push(record[field]);
+      });
       result.push({
         label: record.player,
-        data: [
-          record.grandSlamAus,
-          record.grandSlamRG,
-          record.grandSlamWim,
-          record.grandSlamUSA,
-        ],
+        data: data,
         backgroundColor: backgroundColor[index],
         borderColor: borderColor[index],
       });
@@ -73,7 +74,7 @@ const LineChart = ({ title, labels, records }) => {
   const registers = getData();
 
   const data = {
-    labels: labels.map((label) => label.text),
+    labels: cols.map((label) => label.text),
     datasets: registers,
   };
 
