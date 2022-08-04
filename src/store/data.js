@@ -1,4 +1,4 @@
-export const columns1 = [
+export const columns = [
   { dataField: "player", text: "Jugador" },
   { dataField: "grandSlamAus", text: "Abierto de Australia" },
   { dataField: "grandSlamRG", text: "Roland Garros" },
@@ -6,7 +6,7 @@ export const columns1 = [
   { dataField: "grandSlamUSA", text: "Abierto de Estados Unidos" },
 ];
 
-export const records1 = [
+export const records = [
   {
     player: "Margaret Court",
     grandSlamAus: 11,
@@ -51,7 +51,7 @@ export const records1 = [
   },
 ];
 
-export const columns = [
+export const columns2 = [
   {
     dataField: "team",
     text: "Equipo",
@@ -74,7 +74,7 @@ export const columns = [
   },
 ];
 
-export const records = [
+export const records2 = [
   {
     team: "FC BARCELONA",
     ligue: 11,
