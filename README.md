@@ -16,6 +16,17 @@ Graficador de tablas -> React - ChatJS
 
 ### Gráficas
 
+#### Tabla de datos
+![Captura](https://user-images.githubusercontent.com/7141537/182973273-e92645a1-37bf-458a-80d5-ce14d748acd0.PNG)
+
+#### Filtros
+![Captura1](https://user-images.githubusercontent.com/7141537/182973265-31e005e0-2394-45a9-9932-367d4da52e40.PNG)
+![Captura3](https://user-images.githubusercontent.com/7141537/182973269-aa923f8f-f2a1-48fa-aa0e-ac56aad282be.PNG)
+
+#### Resultados
+![Captura4PNG](https://user-images.githubusercontent.com/7141537/182973272-d99b1bb0-72aa-44e8-bd80-f675618b2496.PNG)
+
+
 #### Pie
 ![Captura](https://user-images.githubusercontent.com/7141537/182040240-5627efcf-cb4a-40de-9415-f2ca34baa4db.PNG)
 
