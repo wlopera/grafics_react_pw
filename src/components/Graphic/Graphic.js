@@ -6,13 +6,12 @@ import { graphics } from "../../store/data";
 
 const Graphic = ({ cols, rows, updateGraph }) => {
   const [options, setOptions] = useState([]);
-  const [labels, setLabels] = useState([]);
+  const [firstField, setFirstField] = useState([]);
   const [records, setRecords] = useState([]);
   const [total, setTotal] = useState([]);
   const [currentOption, setCurrentOption] = useState("total");
   const [optionsGraphics, setOptionsGraphics] = useState(graphics);
   const [currentGraphic, setCurrentGraphic] = useState(1);
-  const [firstField, setFirstField] = useState([]);
 
   useEffect(() => {
     let registers = [];
@@ -26,7 +25,6 @@ const Graphic = ({ cols, rows, updateGraph }) => {
       }
     });
     setOptions(registers);
-    setLabels(rows.map((row) => row.player));
 
     setFirstField(
       rows.map((row, index) => {
@@ -65,6 +63,25 @@ const Graphic = ({ cols, rows, updateGraph }) => {
       ? "Totales"
       : options.filter((option) => option.value === currentOption)[0].text;
 
+  const getData = () => {
+    const values = rows.map((row, index) => {
+      let data = [];
+      let cont = 100;
+      cols.forEach((col) => {
+        data.push(
+          <td scope="row" key={index + cont++}>
+            {row[col.dataField]}
+          </td>
+        );
+      });
+
+      return <tr key={index * cont++}>{data}</tr>;
+    });
+    return values;
+  };
+
+  const data = getData();
+
   return (
     <div>
       <button
@@ -73,6 +90,46 @@ const Graphic = ({ cols, rows, updateGraph }) => {
       >
         Regresar
       </button>
+      <div id="accordion">
+        <div className="card">
+          <div className="card-header" id="headingOne">
+            <h5 className="mb-0">
+              <button
+                className="btn btn-link"
+                data-toggle="collapse"
+                data-target="#collapseOne"
+                aria-expanded="false"
+                aria-controls="collapseOne"
+                type="button"
+              >
+                Tabla de registros
+              </button>
+            </h5>
+          </div>
+
+          <div
+            id="collapseOne"
+            className="collapse show"
+            aria-labelledby="headingOne"
+            data-parent="#accordion"
+          >
+            <div className="card-body">
+              <table className="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    {cols.map((col, index) => (
+                      <th key={index} scope="col">
+                        {col.text}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>{data}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
       <div>
         <select
           className="form-select form-select-sm mb-3 mt-2"
@@ -108,7 +165,7 @@ const Graphic = ({ cols, rows, updateGraph }) => {
       {currentGraphic === 1 && (
         <div className="mt-2">
           {options.length > 0 && (
-            <PieChart title={title} labels={labels} records={records} />
+            <PieChart title={title} labels={firstField} records={records} />
           )}
         </div>
       )}
@@ -121,7 +178,7 @@ const Graphic = ({ cols, rows, updateGraph }) => {
         <div className="mt-2">
           <LineChart
             title="Totales"
-            labels={labels}
+            labels={firstField}
             records={rows}
             cols={options}
           />
